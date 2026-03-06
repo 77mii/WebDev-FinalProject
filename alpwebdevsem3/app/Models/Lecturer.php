@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Lecturer extends Model
+class Lecturer extends Authenticatable
 {
     use HasFactory;
 
@@ -16,6 +16,10 @@ class Lecturer extends Model
         'password',
         'pfp',
         'employeenumber',
+    ];
+
+    protected $hidden = [
+        'password',
     ];
 
     // One-to-Many Relationship with LecturerMK

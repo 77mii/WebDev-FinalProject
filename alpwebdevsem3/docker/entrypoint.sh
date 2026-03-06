@@ -12,6 +12,7 @@ fi
 # ── Ensure storage directories exist and are writable ────
 echo "📁 Setting up storage directories..."
 mkdir -p storage/logs storage/framework/{cache,sessions,views}
+chown -R www-data:www-data storage bootstrap/cache
 chmod -R 775 storage bootstrap/cache
 
 # ── Generate app key if not set ──────────────────────────

@@ -4,16 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\Project;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LecturerProjectsController extends Controller
 {
     public function index()
     {
-        // Fetch the logged-in lecturer from shared middleware
-        $lecturer = view()->shared('lecturer');
+        // Fetch the authenticated lecturer
+        $lecturer = Auth::guard('lecturer')->user();
 
         if (!$lecturer) {
-            return redirect()->route('login')->with('error', 'Lecturer not found.');
+            return redirect()->route('lecturer.login')->with('error', 'Please log in as a lecturer.');
         }
 
         // Fetch all projects associated with the lecturer's LecturerMKs

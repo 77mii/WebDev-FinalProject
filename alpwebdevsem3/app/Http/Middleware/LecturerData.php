@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use App\Models\Lecturer;
+use Illuminate\Support\Facades\Auth;
 
 class LecturerData
 {
@@ -15,11 +15,11 @@ class LecturerData
             return $next($request); // Skip lecturer middleware
         }
 
-        // Fetch lecturer data
-        $lecturer = Lecturer::find(1); // Default ID for lecturer testing 30 isa
+        // Fetch the authenticated lecturer
+        $lecturer = Auth::guard('lecturer')->user();
 
         if (!$lecturer) {
-            return redirect()->route('login')->with('error', 'Lecturer not found.');
+            return redirect()->route('lecturer.login')->with('error', 'Please log in as a lecturer.');
         }
 
         // Share lecturer data globally

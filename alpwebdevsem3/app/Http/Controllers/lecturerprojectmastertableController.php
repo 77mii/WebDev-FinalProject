@@ -59,26 +59,22 @@ namespace App\Http\Controllers;
 
 use App\Models\Project;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\LecturerMK;
 
 class lecturerprojectmastertableController extends Controller
 {
     public function index()
     {
-        $lecturer = view()->shared('lecturer');
+        $lecturer = Auth::guard('lecturer')->user();
 
         if (!$lecturer) {
-            return redirect()->route('login')->with('error', 'Lecturer not found.');
+            return redirect()->route('lecturer.login')->with('error', 'Please log in as a lecturer.');
         }
 
         $lecturerMKs = LecturerMK::with(['mataKuliah', 'projects.studentProjects.studentGroups'])
             ->where('lecturer_id', $lecturer->id)
             ->get();
-
-        // Debugging: Check the retrieved data
-        if ($lecturerMKs->isEmpty()) {
-            dd('No LecturerMK records found for this lecturer.');
-        }
 
         $Courses = [];
 

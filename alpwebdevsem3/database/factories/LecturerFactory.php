@@ -15,7 +15,7 @@ class LecturerFactory extends Factory
             'lecturername' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail(),
             'password' => bcrypt('password'), // Example hashed password
-            'pfp' => $this->faker->imageUrl(100, 100, 'people', true, 'Lecturer'), // Random profile image
+            'pfp' => 'https://picsum.photos/seed/' . uniqid('lec_') . '/100/100',
             'employeenumber' => $this->faker->unique()->numberBetween(1000, 9999),
         ];
     }

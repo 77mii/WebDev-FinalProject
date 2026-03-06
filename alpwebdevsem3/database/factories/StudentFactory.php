@@ -16,7 +16,7 @@ class StudentFactory extends Factory
             'email' => $this->faker->unique()->safeEmail(),
             //'password' => Str::random(8), // Generate a random string of 8 characters
             'password' => bcrypt('password'),
-            'pfp' => $this->faker->imageUrl(100, 100, 'people', true, 'Student'),
+            'pfp' => 'https://picsum.photos/seed/' . uniqid('stu_') . '/100/100',
             'nim' => $this->faker->unique()->numberBetween(100000, 999999),
         ];
     }

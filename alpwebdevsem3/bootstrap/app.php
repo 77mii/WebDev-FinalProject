@@ -13,13 +13,24 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         // Add an array of middleware
         $middleware->use([
-            
+
        //  \App\Http\Middleware\UserDataMiddleware::class, // New combined middleware
      //\App\Http\Middleware\StudentData::class, // Existing middleware
  //  \App\Http\Middleware\AdminMiddleware::class, // Add this line to check admin authentication
   //     \App\Http\Middleware\LecturerData::class, // Lecturer middleware
             // \App\Http\Middleware\StudentData::class, // Your custom middleware
         ]);
+
+        // Redirect unauthenticated users to the correct login page based on the route
+        $middleware->redirectGuestsTo(function (\Illuminate\Http\Request $request) {
+            if ($request->is('lecturer/*')) {
+                return route('lecturer.login');
+            }
+            if ($request->is('student/*')) {
+                return route('student.login');
+            }
+            return route('login');
+        });
 
         $middleware->alias([
          //   'studentdata' => \App\Http\Middleware\StudentData::class,

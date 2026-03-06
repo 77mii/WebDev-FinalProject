@@ -28,6 +28,9 @@
         @if (auth()->guard('admin')->check())
             <!-- If the user is an admin, use navigation2 -->
             <x-navigation2></x-navigation2>
+        @elseif (auth()->guard('lecturer')->check())
+            <!-- If the user is a lecturer, use navigation4 -->
+            <x-navigation4></x-navigation4>
         @elseif (auth()->guard('student')->check())
             <!-- If the user is a student, use navigation3 -->
             <x-navigation3></x-navigation3>
@@ -35,7 +38,7 @@
             <!-- Use navigation1 for guests -->
             <x-navigation1></x-navigation1>
         @endif
-            {{-- @if (auth()->guard('admin')->check()) 
+            {{-- @if (auth()->guard('admin')->check())
                 <!-- If the user is an admin, use navigation2 -->
                 <x-navigation2></x-navigation2>
             @else

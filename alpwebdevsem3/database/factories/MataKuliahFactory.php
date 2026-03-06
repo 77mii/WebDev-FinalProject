@@ -13,9 +13,10 @@ class MataKuliahFactory extends Factory
     {
         return [
             'namamk' => $this->faker->word(),
+            'namaprodi' => implode(' ', $this->faker->words($this->faker->numberBetween(1, 2))),
             'description' => $this->faker->paragraph(),
-            'smallimage' => $this->faker->imageUrl(200, 200, 'abstract', true, 'Small Image'),
-            'longimage' => $this->faker->imageUrl(400, 200, 'abstract', true, 'Long Image'),
+            'smallimage' => 'https://picsum.photos/seed/' . uniqid('mks_') . '/200/200',
+            'longimage' => 'https://picsum.photos/seed/' . uniqid('mkl_') . '/400/200',
         ];
     }
 }

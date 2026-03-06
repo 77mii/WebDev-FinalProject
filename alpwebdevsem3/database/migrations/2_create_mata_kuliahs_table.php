@@ -11,6 +11,7 @@ return new class extends Migration
         Schema::create('mata_kuliahs', function (Blueprint $table) {
             $table->id();
             $table->string('namamk');
+            $table->string('namaprodi')->nullable();
             $table->text('description');
             $table->string('smallimage')->nullable();
             $table->string('longimage')->nullable();

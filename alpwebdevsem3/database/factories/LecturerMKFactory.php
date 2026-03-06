@@ -19,7 +19,7 @@ class LecturerMKFactory extends Factory
             'tahun' => $this->faker->year(),
             'semester' => (string) $this->faker->numberBetween(1, 8), // Random semester between 1 and 8 as a string
             'lmk_status' => $this->faker->randomElement(['Ongoing', 'Finished']), // Random status
-            'lmk_image' => $this->faker->imageUrl(),  // Generate a random image URL
+            'lmk_image' => 'https://picsum.photos/seed/' . uniqid('lmk_') . '/640/480',
             'additional_lecturers' => $this->faker->name(),
             'visibility' => true, // Set visibility to true by default
         ];

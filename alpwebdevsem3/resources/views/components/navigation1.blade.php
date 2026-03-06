@@ -30,7 +30,7 @@
         <div class="flex justify-between items-center">
             <div class="flex space-x-4">
                 <!-- Lower Navigation Links for Guest -->
-                <a href="/" class="text-lg hover:text-orange-300 transition duration-200 
+                <a href="/" class="text-lg hover:text-orange-300 transition duration-200
                     {{ request()->is('/') ? 'text-orange-500 font-bold' : 'text-black font-bold' }}">Home</a>
                 <a href="{{ route('guestprojects.index') }}" class="text-lg hover:text-orange-300 transition duration-200
                     {{ request()->is('guestprojects') ? 'text-orange-500 font-bold' : 'text-black font-bold' }}">Projects</a>
@@ -47,6 +47,9 @@
             <div class="flex space-x-4">
                 <a href="{{ route('student.login') }}" class="bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600 transition duration-200">
                     Student Login
+                </a>
+                <a href="{{ route('lecturer.login') }}" class="bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600 transition duration-200">
+                    Lecturer Login
                 </a>
                 <a href="{{ route('admin.login') }}" class="bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600 transition duration-200">
                     Admin Login

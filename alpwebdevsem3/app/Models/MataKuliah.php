@@ -12,6 +12,7 @@ class MataKuliah extends Model
 
     protected $fillable = [
         'namamk',
+        'namaprodi',
         'description',
         'smallimage',
         'longimage',

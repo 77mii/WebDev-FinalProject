@@ -3,18 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\LecturerMK;
 
 class LecturerCoursesController extends Controller
 {
     public function index()
     {
-        // Fetch the globally shared lecturer variable
-        $lecturer = view()->shared('lecturer');
+        // Fetch the authenticated lecturer
+        $lecturer = Auth::guard('lecturer')->user();
 
         // Ensure lecturer exists
         if (!$lecturer) {
-            return redirect()->route('login')->with('error', 'Lecturer not found.');
+            return redirect()->route('lecturer.login')->with('error', 'Please log in as a lecturer.');
         }
 
         // Fetch LecturerMKs related to the lecturer with MataKuliah details

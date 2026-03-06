@@ -52,6 +52,12 @@ return [
             'provider' => 'students',
             'redirect' => '/student/login',  // Specify the route for student login
         ],
+
+        'lecturer' => [
+            'driver' => 'session',
+            'provider' => 'lecturers',
+            'redirect' => '/lecturer/login',
+        ],
     ],
 
     /*
@@ -86,6 +92,11 @@ return [
         'students' => [
             'driver' => 'eloquent',
             'model' => App\Models\Student::class, // Student model
+        ],
+
+        'lecturers' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Lecturer::class,
         ],
         // 'users' => [
         //     'driver' => 'database',

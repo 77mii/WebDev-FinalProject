@@ -10,6 +10,14 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\StudentController;  // Make sure this import is at the top
 use App\Http\Controllers\StudentAuthController;
+use App\Http\Controllers\LecturerAuthController;
+use App\Http\Controllers\LecturerAccountController;
+use App\Http\Controllers\LecturerCoursesController;
+use App\Http\Controllers\LecturerCourseDetailController;
+use App\Http\Controllers\LecturerProjectsController;
+use App\Http\Controllers\LecturerProjectDetailController;
+use App\Http\Controllers\LecturerStudentProjectDetailController;
+use App\Http\Controllers\lecturerprojectmastertableController;
 
 // Guest Routes
 Route::get('/', [GuestController::class, 'index'])->name('guest.index');
@@ -33,7 +41,7 @@ Route::get('/filter-options', [GuestController::class, 'getFilterOptions'])->nam
 
 
 // Admin Authentication Routes
-Route::get('/admin/login', [AdminAuthController::class, 'showLoginForm'])->name('admin.login'); 
+Route::get('/admin/login', [AdminAuthController::class, 'showLoginForm'])->name('admin.login');
 Route::get('login', [AdminAuthController::class, 'showLoginForm'])->name('login');// Admin login route\
 //Route::get('/admin/login', [AdminAuthController::class, 'showLoginForm'])->name('login'); // Admin login route
 Route::post('/admin/login', [AdminAuthController::class, 'login'])->name('admin.login.submit'); // Admin login submit route
@@ -52,7 +60,7 @@ Route::post('/student/login', [StudentAuthController::class, 'login'])->name('st
 Route::post('/student/logout', [StudentAuthController::class, 'logout'])->name('student.logout');
 
 // Admin Protected Routes
-Route::middleware(['auth:admin'])->group(function () {    
+Route::middleware(['auth:admin'])->group(function () {
     // Admin Dashboard
     Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
     Route::get('/admin/students', [AdminController::class, 'showStudentsLog'])->name('admin.students.log'); // Students Log
@@ -76,7 +84,7 @@ Route::middleware(['auth:admin'])->group(function () {
 
     Route::get('/admin/lecturer/{lecturer}', [AdminController::class, 'showLecturerDetails'])->name('admin.lecturer.details');
     Route::get('/admin/lecturer/{lecturer}/edit', [AdminController::class, 'editLecturer'])->name('admin.lecturer.edit');
-    Route::put('/admin/lecturer/{lecturer}', [AdminController::class, 'updateLecturer'])->name('admin.lecturer.update');  
+    Route::put('/admin/lecturer/{lecturer}', [AdminController::class, 'updateLecturer'])->name('admin.lecturer.update');
     Route::delete('/admin/lecturer/{lecturer}', [AdminController::class, 'destroyLecturer'])->name('admin.lecturer.destroy');
 
     Route::get('/admin/coursedetail/{id}', [AdminController::class, 'showCourseDetail'])->name('admin.coursedetail');
@@ -89,7 +97,7 @@ Route::middleware(['auth:admin'])->group(function () {
 
     Route::get('/admin/studentproject/create/{project_id}', [AdminController::class, 'createStudentProject'])->name('admin.studentproject.create');
     Route::post('/admin/studentproject/store', [AdminController::class, 'storeStudentProject'])->name('admin.studentproject.store');
-    
+
     // Route::get('/admin/course/create', [AdminController::class, 'createCourseAdmin'])->name('admin.course.create.placeholder');
     Route::post('/admin/course/store', [AdminController::class, 'storeCourseWithLecturer'])->name('admin.course.store.dynamic');
     Route::get('/admin/course/{id}/edit', [AdminController::class, 'editCourse'])->name('admin.course.edit');
@@ -101,7 +109,7 @@ Route::middleware(['auth:admin'])->group(function () {
 
     Route::get('/admin/lecturer/{lecturerId}/course/create', [AdminController::class, 'createCourse'])->name('admin.course.create');
     Route::post('/admin/lecturer/course/store', [AdminController::class, 'storeCourse'])->name('admin.course.store');
-    
+
     // AdminController2 routes
     Route::get('/admin/course/create2', [AdminController2::class, 'createCourseAdmin2'])->name('admin.course.create2');
     Route::post('/admin/course/store2', [AdminController2::class, 'storeLecturermkWithLecturer2'])->name('admin.course.store2');
@@ -130,5 +138,21 @@ Route::middleware('auth:student')->group(function () {
         Route::get('/student/studentproject/{id}/edit', [StudentController::class, 'editStudentProject'])->name('student.studentproject.edit');
         Route::put('/student/studentproject/{id}', [StudentController::class, 'updateStudentProject'])->name('student.studentproject.update');
         Route::delete('/student/studentproject/{id}', [StudentController::class, 'destroyStudentProject'])->name('student.studentproject.destroy');
-        Route::get('/student/your-projects', [StudentController::class, 'yourProjects'])->name('student.your.projects');       
+        Route::get('/student/your-projects', [StudentController::class, 'yourProjects'])->name('student.your.projects');
+});
+
+// Lecturer Authentication Routes
+Route::get('/lecturer/login', [LecturerAuthController::class, 'showLoginForm'])->name('lecturer.login');
+Route::post('/lecturer/login', [LecturerAuthController::class, 'login'])->name('lecturer.login.submit');
+Route::post('/lecturer/logout', [LecturerAuthController::class, 'logout'])->name('lecturer.logout');
+
+// Lecturer Protected Routes
+Route::middleware(['auth:lecturer'])->group(function () {
+    Route::get('/lecturer/courses', [LecturerCoursesController::class, 'index'])->name('lecturer.courses');
+    Route::get('/lecturer/courses/{id}', [LecturerCourseDetailController::class, 'show'])->name('lecturer.course.detail');
+    Route::get('/lecturer/projects', [LecturerProjectsController::class, 'index'])->name('lecturer.projects');
+    Route::get('/lecturer/projects/{id}', [LecturerProjectDetailController::class, 'show'])->name('lecturer.project.detail');
+    Route::get('/lecturer/studentproject/{id}', [LecturerStudentProjectDetailController::class, 'show'])->name('lecturer.studentproject.detail');
+    Route::get('/lecturer/mastertable', [lecturerprojectmastertableController::class, 'index'])->name('lecturer.mastertable');
+    Route::get('/lecturer/account', [LecturerAccountController::class, 'showAccount'])->name('lecturer.account');
 });
