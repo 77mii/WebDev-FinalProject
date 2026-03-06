@@ -15,7 +15,7 @@ class ProjectImageFactory extends Factory
         return [
             'sp_id' => StudentProject::factory(),
             // 'imageid' => $this->faker->uuid(),
-            'imageurl' => $this->faker->imageUrl(640, 480, 'project', true, 'Image'),
+            'imageurl' => 'https://picsum.photos/seed/' . uniqid('img_') . '/640/480',
             'description' => $this->faker->sentence(),
         ];
     }

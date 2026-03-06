@@ -17,7 +17,7 @@ class ProjectFactory extends Factory
             'description' => $this->faker->paragraph(),
             'status' => $this->faker->randomElement(['Ongoing', 'Finished']),
             'type' => $this->faker->randomElement(['AFL1', 'AFL2', 'AFL3', 'ALP']),
-            'projectimage' => $this->faker->imageUrl(400, 300, 'project', true, 'Project'),
+            'projectimage' => 'https://picsum.photos/seed/' . uniqid('proj_') . '/400/300',
             'lmk_id' => LecturerMK::factory(),
             'visibility' => true, // Set visibility to true by default
         ];
