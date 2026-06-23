@@ -32,6 +32,9 @@ storage/logs/*
 storage/framework/cache/*
 storage/framework/sessions/*
 storage/framework/views/*
+public/storage
+storage/app/public/*
+
 
 # Environment
 .env

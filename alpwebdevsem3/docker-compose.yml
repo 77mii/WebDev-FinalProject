@@ -4,7 +4,7 @@ services:
     build:
       context: .
       dockerfile: docker/php/Dockerfile
-    container_name: laravel-app
+    container_name: laravel-app-webdev-final-project
     restart: unless-stopped
     working_dir: /var/www/html
     volumes:
@@ -23,7 +23,7 @@ services:
   # ── Nginx Web Server ─────────────────────────────────────
   nginx:
     image: nginx:alpine
-    container_name: laravel-nginx
+    container_name: laravel-nginx-webdev-final-project
     restart: unless-stopped
     ports:
       - "8080:80"
@@ -38,7 +38,7 @@ services:
   # ── MySQL 8 Database ─────────────────────────────────────
   mysql:
     image: mysql:8.0
-    container_name: laravel-mysql
+    container_name: laravel-mysql-webdev-final-project
     restart: unless-stopped
     ports:
       - "3306:3306"
@@ -61,7 +61,7 @@ services:
   # ── Redis Cache ──────────────────────────────────────────
   redis:
     image: redis:alpine
-    container_name: laravel-redis
+    container_name: laravel-redis-webdev-final-project
     restart: unless-stopped
     ports:
       - "6379:6379"
@@ -78,7 +78,7 @@ services:
   # ── Node.js for Vite (dev only) ──────────────────────────
   node:
     image: node:20-alpine
-    container_name: laravel-node
+    container_name: laravel-node-webdev-final-project
     working_dir: /var/www/html
     volumes:
       - .:/var/www/html
@@ -95,7 +95,7 @@ services:
     build:
       context: .
       dockerfile: docker/php/Dockerfile
-    container_name: laravel-queue
+    container_name: laravel-queue-webdev-final-project
     restart: unless-stopped
     working_dir: /var/www/html
     volumes:
@@ -114,7 +114,7 @@ services:
   # ── phpMyAdmin ───────────────────────────────────────────
   phpmyadmin:
     image: phpmyadmin:latest
-    container_name: laravel-phpmyadmin
+    container_name: laravel-phpmyadmin-webdev-final-project
     restart: unless-stopped
     ports:
       - "8888:80"
